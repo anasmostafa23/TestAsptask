@@ -1,0 +1,94 @@
+# Ignore build outputs
+[Bb]in/
+[Oo]bj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userprefs
+*.lock.json
+
+# Ignore IDE-specific files
+.vs/
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignore NuGet packages and restore files
+[Nn]u[Gg]et/
+*.nupkg
+packages/
+nuget.exe
+
+# Ignore local development files
+appsettings.Development.json
+
+# Ignore Azure Functions artifacts
+azure-functions-cli/
+func.exe
+
+# Ignore test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Ignore ReSharper files
+_ReSharper.*
+*.ReSharper
+*.DotSettings.user
+
+# Ignore Rider files
+.idea/
+*.sln.iml
+
+# Ignore Visual Studio cache/options directory
+.vs/
+
+# Ignore MSBuild output files
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Ignore .NET Core tools
+.dotnet/
+
+# Ignore local runtime files
+**/[Ll]ocal/
+**/[Tt]emp/
+
+# Ignore logs and diagnostics
+*.log
+*.sql
+*.csv
+*.dat
+*.patch
+*.diff
+
+# Ignore macOS files
+.DS_Store
+
+# Ignore Docker files
+docker-compose.override.yml
+docker-compose.dcproj
+
+# Ignore Node.js files (if applicable)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore coverage reports
+coverage/
+*.coverage
+*.coverage.xml
+
+# Ignore compiled files
+*.dll
+*.pdb
+*.exe
+
+# Ignore SQLite files
+*.db
+*.sqlite
+
+# Ignore Rider/ReSharper cache
+_ReSharper.Caches/
