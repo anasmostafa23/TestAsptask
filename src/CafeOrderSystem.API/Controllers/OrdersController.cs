@@ -2,6 +2,8 @@ using CafeOrderSystem.Domain.Entities;
 using CafeOrderSystem.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using CafeOrderSystem.Data.Context;
+
 
 namespace CafeOrderSystem.API.Controllers;
 

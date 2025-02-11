@@ -6,4 +6,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!-- Required for EF Core -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
+
+    <!-- Database Provider: Choose the correct one -->
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+    <!-- OR if using SQL Server -->
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" /> -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Reference to Domain Project (for Entities) -->
+    <ProjectReference Include="..\CafeOrderSystem.Domain\CafeOrderSystem.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

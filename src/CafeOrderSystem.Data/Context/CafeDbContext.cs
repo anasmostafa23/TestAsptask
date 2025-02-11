@@ -1,6 +1,5 @@
 using CafeOrderSystem.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-
 namespace CafeOrderSystem.Data.Context;
 public class CafeDbContext : DbContext
 {

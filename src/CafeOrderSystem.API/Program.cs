@@ -1,5 +1,7 @@
 using CafeOrderSystem.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using CafeOrderSystem.Domain.Entities;
+using CafeOrderSystem.Domain.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
 
