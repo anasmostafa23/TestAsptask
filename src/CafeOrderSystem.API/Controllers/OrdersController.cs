@@ -1,9 +1,7 @@
 using CafeOrderSystem.Domain.Entities;
 using CafeOrderSystem.Domain.Enums;
+using CafeOrderSystem.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using CafeOrderSystem.Data.Context;
-
 
 namespace CafeOrderSystem.API.Controllers;
 
@@ -11,49 +9,77 @@ namespace CafeOrderSystem.API.Controllers;
 [Route("api/[controller]")]
 public class OrdersController : ControllerBase
 {
-    private readonly CafeDbContext _context;
+    private readonly OrderService _orderService;
 
-    public OrdersController(CafeDbContext context) => _context = context;
+    // Inject OrderService via constructor
+    public OrdersController(OrderService orderService)
+    {
+        _orderService = orderService;
+    }
 
+    // Create a new order
     [HttpPost]
-    public async Task<IActionResult> CreateOrder(Order order)
+    public async Task<IActionResult> CreateOrder([FromBody] Order order)
     {
-        order.Status = OrderStatus.InProgress.ToString();
-        _context.Orders.Add(order);
-        await _context.SaveChangesAsync();
-        return Ok(order);
+        if (order == null)
+        {
+            return BadRequest("Order data is required.");
+        }
+
+        try
+        {
+            order.Status = OrderStatus.InProgress.ToString(); // Set initial status
+            await _orderService.CreateOrderAsync(order);
+            return Ok(order);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while creating the order.");
+        }
     }
 
+    // Update the status of an existing order
     [HttpPut("{id}/status")]
-    public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] OrderStatus status)
+    public async Task<IActionResult> UpdateOrderStatus(Guid id, [FromBody] OrderStatus status)
     {
-        var order = await _context.Orders.FindAsync(id);
-        if (order == null) return NotFound();
-
-        if ((order.Status == OrderStatus.Completed.ToString() && status == OrderStatus.Canceled) ||
-            (order.Status == OrderStatus.Canceled.ToString() && status == OrderStatus.Completed))
-            return BadRequest("Invalid status transition");
-
-        order.Status = status.ToString();
-        await _context.SaveChangesAsync();
-        return Ok(order);
+        try
+        {
+            await _orderService.UpdateOrderStatusAsync(id, status.ToString());
+            return Ok();
+        }
+        catch (ArgumentException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message); // Invalid status transition
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while updating the order status.");
+        }
     }
 
+    // Get orders by status and time range
     [HttpGet]
     public async Task<IActionResult> GetOrders(
         [FromQuery] OrderStatus? status,
         [FromQuery] DateTime? from,
         [FromQuery] DateTime? to)
     {
-        var query = _context.Orders.AsQueryable();
-
-        if (status != null)
-            query = query.Where(o => o.Status == status.ToString());
-
-        if (from != null && to != null)
-            query = query.Where(o => o.OrderTime >= from && o.OrderTime <= to);
-
-        var orders = await query.ToListAsync();
-        return Ok(orders);
+        try
+        {
+            var orders = await _orderService.GetOrdersByStatusAndTimeRangeAsync(status?.ToString(), from, to);
+            return Ok(orders);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while retrieving orders.");
+        }
     }
 }

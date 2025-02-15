@@ -5,8 +5,10 @@ public class OrderItem
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public required string ItemName { get; set; }
+    public decimal Price { get; set; } // Add this property
     public Guid OrderId { get; set; }
 
     [JsonIgnore]
     public Order? Order { get; set; }
 }
+

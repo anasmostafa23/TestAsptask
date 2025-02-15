@@ -9,6 +9,7 @@
   <ItemGroup>
     <!-- Only if you're using data annotations like [Required], [MaxLength] -->
        <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+       
 
   </ItemGroup>
 

@@ -1,13 +1,20 @@
 using CafeOrderSystem.Data.Context;
+using CafeOrderSystem.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using CafeOrderSystem.Domain.Interfaces;
+using CafeOrderSystem.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<OrderService>();
 
 // Add DbContext and specify the migrations assembly
 builder.Services.AddDbContext<CafeDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),
         b => b.MigrationsAssembly("CafeOrderSystem.Data")));  // Specify migration assembly
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 // Add controllers with proper JSON settings
 builder.Services.AddControllers()
