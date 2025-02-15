@@ -92,5 +92,3 @@ coverage/
 
 # Ignore Rider/ReSharper cache
 _ReSharper.Caches/
-src/CafeOrderSystem.Data/Migrations/20250214201121_InitialCreate.cs
-src/CafeOrderSystem.Data/Migrations/20250214201121_InitialCreate.Designer.cs
