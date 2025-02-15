@@ -52,9 +52,7 @@ Ensure you have the following installed:
    dotnet run
    ```
 
-5. **Access API Documentation**
-   Open your browser and navigate to:
-   - Swagger UI: [http://localhost:5000/swagger](http://localhost:5000/swagger)
+
 
 ## API Endpoints
 
