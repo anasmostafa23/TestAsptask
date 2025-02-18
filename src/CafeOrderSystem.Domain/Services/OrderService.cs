@@ -18,6 +18,8 @@ public class OrderService
         if (order == null)
             throw new ArgumentException("Order data is required.");
 
+        order.CalculateTotal();
+
         await _orderRepository.AddOrderAsync(order);
     }
 
@@ -32,6 +34,7 @@ public class OrderService
             throw new InvalidOperationException("Invalid status transition.");
 
         order.Status = status;
+        order.CalculateTotal();
         await _orderRepository.UpdateOrderAsync(order);
     }
 

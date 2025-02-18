@@ -34,14 +34,16 @@ public class OrderRepository : IOrderRepository
     }
 
     public async Task<List<Order>> GetOrdersByStatusAsync(string? status)
+{
+    var query = _context.Orders
+        .Include(o => o.OrderItems) // Include OrderItems
+        .AsQueryable();
+
+    if (!string.IsNullOrEmpty(status))
     {
-        var query = _context.Orders.AsQueryable();
-
-        if (!string.IsNullOrEmpty(status))
-        {
-            query = query.Where(o => o.Status == status);
-        }
-
-        return await query.ToListAsync();
+        query = query.Where(o => o.Status == status);
     }
+
+    return await query.ToListAsync();
+}
 }
