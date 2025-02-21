@@ -24,13 +24,6 @@ RESTful API, разработанное на ASP.NET Core 8 и PostgreSQL для
   PUT     /api/orders/{id}/status → Обновить статус заказа  
   GET     /api/orders           → Получить заказы по статусу и временному диапазону  
   
-- **RESTful-дизайн**:  
-  - Использование правильных HTTP-методов и статусных кодов (`200 OK`, `400 Bad Request`, `404 Not Found`).  
-  - Пример:  
-    ```bash
-    PUT /api/orders/0b6a1e85-a683-4763-9196-4d608f48f6bd/status
-    Body: "Completed"
-    ```
 
 ### 3. **Дизайн сущностей**
 - **Сущности**:  
@@ -152,6 +145,5 @@ Body:
 
 ---
 
-```
 
-This version is a direct translation of the original English README.md into Russian, ensuring that all technical terms and structure are preserved. You can now have a look on the English Version.
+This version is a direct translation of the original English README.md into Russian, ensuring that all technical terms and structure are preserved. You can have a look on the English Version.
