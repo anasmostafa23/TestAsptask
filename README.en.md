@@ -1,5 +1,5 @@
 
-```markdown
+
 # Café Order Management System
 
 A RESTful API built with ASP.NET Core 8 and PostgreSQL for managing café orders. This project adheres to domain-driven design, SOLID principles, and Microsoft coding standards.
